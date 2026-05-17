@@ -1,0 +1,95 @@
+# Clang-Format 配置，适用于本 STM32 C/C++ 工程。
+BasedOnStyle: LLVM # 基于 LLVM 风格，可根据需要调整。
+IndentWidth: 4 # 缩进宽度为 4 个空格。
+TabWidth: 4 # 制表符宽度也设置为 4 个空格。
+UseTab: Never # 不使用制表符，全部使用空格。
+ColumnLimit: 120 # 最大行宽限制为 120 个字符。
+AlignEscapedNewlines: Left # 让宏续行反斜杠 '\' 靠左对齐。
+BreakBeforeBraces: Attach # 大括号与语句同行。
+AllowShortIfStatementsOnASingleLine: true # 允许简短的 if 语句写在一行。
+IndentCaseLabels: false # switch 的 case 标签不额外缩进。
+AlignAfterOpenBracket: Align # 在左括号后对齐参数。
+AlignConsecutiveMacros: true # 让连续宏定义的名称和值对齐。
+SpaceBeforeAssignmentOperators: true # 赋值运算符前添加空格。
+SpaceBeforeParens: ControlStatements # 控制语句前保留空格，其他不加空格。
+SpaceInEmptyParentheses: false # 空括号内不加空格。
+SpacesInAngles: false # 模板尖括号内不加空格。
+SpacesInCStyleCastParentheses: false # C 风格转换括号内不加空格。
+SpacesInContainerLiterals: false # 容器字面量内不加空格。
+SpacesInParentheses: false # 圆括号内不加空格。
+SpacesInSquareBrackets: false # 方括号内不加空格。
+PointerAlignment: Right # 指针符号右对齐，int *ptr 形式。
+ReferenceAlignment: Right # 引用符号右对齐，int &ref 形式。
+AllowShortBlocksOnASingleLine: true # 允许简短代码块压缩到一行，例如 do { ... } while (0) 宏。
+AllowShortCaseLabelsOnASingleLine: false # case 标签不写在同一行。
+AllowShortFunctionsOnASingleLine: All # 允许简短函数写在一行。
+AllowShortLambdasOnASingleLine: true # 允许简短 lambda 写在一行。
+AllowShortLoopsOnASingleLine: true # 允许简短循环写在一行。
+AlwaysBreakAfterDefinitionReturnType: None # 定义时返回类型后不换行。
+AlwaysBreakAfterReturnType: None # 声明时返回类型后不换行。
+AlwaysBreakBeforeMultilineStrings: true # 多行字符串前换行。
+AlwaysBreakTemplateDeclarations: true # 模板声明总是换行。
+BinPackArguments: true # 尽量将函数参数打包到同一行。
+BinPackParameters: true # 尽量将函数参数声明打包到同一行。
+BraceWrapping: # 大括号换行规则。
+  AfterClass: false # class 定义后不换行。
+  AfterControlStatement: false # 控制语句后不换行。
+  AfterEnum: false # enum 定义后不换行。
+  AfterFunction: true # 函数定义后换行。
+  AfterNamespace: false # namespace 定义后不换行。
+  AfterObjCDeclaration: false # Objective-C 声明后不换行。
+  AfterStruct: false # struct 定义后不换行。
+  AfterUnion: false # union 定义后不换行。
+  BeforeCatch: false # catch 前不换行。
+  BeforeElse: false # else 前不换行。
+  IndentBraces: false # 大括号不额外缩进。
+  SplitEmptyFunction: true # 空函数拆成两行。
+  SplitEmptyRecord: true # 空记录拆成两行。
+  SplitEmptyNamespace: true # 空命名空间拆成两行。
+BreakBeforeBinaryOperators: None # 二元运算符不换行。
+BreakBeforeTernaryOperators: true # 三元运算符 ?/: 前换行。
+BreakConstructorInitializersBeforeComma: false # 构造函数初始化列表逗号前不换行。
+BreakAfterJavaFieldAnnotations: false # Java 字段注解后不换行。
+BreakStringLiterals: true # 允许长字符串换行。
+CommentPragmas: '^ IWYU pragma:' # 忽略 IWYU pragma 的格式化。
+CompactNamespaces: false # 不压缩命名空间结构。
+ConstructorInitializerAllOnOneLineOrOnePerLine: true # 构造函数初始化列表要么全在一行，要么每项一行。
+ConstructorInitializerIndentWidth: 4 # 构造函数初始化列表的缩进宽度。
+ContinuationIndentWidth: 4 # 续行的缩进宽度。
+Cpp11BracedListStyle: true # 使用 C++11 的大括号列表初始化样式。
+DerivePointerAlignment: true # 指针对齐方式从代码中推导。
+DisableFormat: false # 启用格式化功能。
+ExperimentalAutoDetectBinPacking: false # 禁用实验性参数打包检测。
+ForEachMacros: [ foreach, Q_FOREACH, BOOST_FOREACH ] # 将这些识别为 foreach 循环宏。
+IncludeCategories: # include 排序规则。
+  - Regex: '^<.*\.h>' # 第一类：系统头文件 .h。
+    Priority: 1
+  - Regex: '^<.*' # 第二类：其他系统头文件。
+    Priority: 2
+  - Regex: '.*' # 第三类：项目头文件。
+    Priority: 3
+IncludeIsMainRegex: '([-_](test|unittest))?$' # 判断是否为主头文件。
+IndentWrappedFunctionNames: false # 换行的函数名不缩进。
+JavaScriptQuotes: Leave # JavaScript 保留原始引号风格。
+JavaScriptWrapImports: true # JavaScript import 语句允许换行。
+KeepEmptyLinesAtStartOfBlocks: false # 块开始处不保留空行。
+MacroBlockBegin: '' # 宏块开始标记为空。
+MacroBlockEnd: '' # 宏块结束标记为空。
+MaxEmptyLinesToKeep: 1 # 保留最多 1 个连续空行。
+NamespaceIndentation: None # 命名空间内部不做额外缩进。
+ObjCBlockIndentWidth: 2 # Objective-C block 缩进宽度。
+ObjCSpaceAfterProperty: false # Objective-C property 关键字后不加空格。
+ObjCSpaceBeforeProtocolList: false # Objective-C 协议列表前不加空格。
+PenaltyBreakBeforeFirstCallParameter: 1 # 调用参数前换行的惩罚值。
+PenaltyBreakComment: 300 # 注释换行的惩罚值。
+PenaltyBreakFirstLessLess: 120 # << 运算符前换行的惩罚值。
+PenaltyBreakString: 1000 # 字符串换行的惩罚值。
+PenaltyExcessCharacter: 1000000 # 超出字符限制的惩罚值。
+PenaltyReturnTypeOnItsOwnLine: 200 # 返回类型单独换行的惩罚值。
+SortIncludes: true # 启用 include 自动排序。
+SpaceAfterCStyleCast: false # C 风格强制转换后不加空格。
+SpaceAfterTemplateKeyword: true # template 关键字后加空格。
+SpaceBeforeInheritanceColon: true # 继承冒号前加空格。
+SpaceBeforeRangeBasedForLoopColon: true # 范围 for 循环冒号前加空格。
+Standard: Auto # 自动检测语言标准。
+TypenameMacros: [ TYPENAME ] # 将 TYPENAME 识别为 typename。

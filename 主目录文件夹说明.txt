@@ -1,0 +1,11 @@
+Drivers 			存放与硬件相关的驱动层文件  
+Middlewares 	存放中间层组件文件和第三方中间层文件 
+Output 			存放工程编译输出文件 
+User 			存放HAL库用户配置文件、main.c、中断处理文件，以及分散加载文件 
+information		存放参考文件
+app				存放业务逻辑文件和任务逻辑文件
+
+
+
+
+
