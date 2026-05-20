@@ -3,7 +3,7 @@ BasedOnStyle: LLVM # 基于 LLVM 风格，可根据需要调整。
 IndentWidth: 4 # 缩进宽度为 4 个空格。
 TabWidth: 4 # 制表符宽度也设置为 4 个空格。
 UseTab: Never # 不使用制表符，全部使用空格。
-ColumnLimit: 120 # 最大行宽限制为 120 个字符。
+ColumnLimit: 160 # 最大行宽限制为 160 个字符。
 AlignEscapedNewlines: Left # 让宏续行反斜杠 '\' 靠左对齐。
 BreakBeforeBraces: Attach # 大括号与语句同行。
 AllowShortIfStatementsOnASingleLine: true # 允许简短的 if 语句写在一行。

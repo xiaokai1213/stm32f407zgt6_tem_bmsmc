@@ -2,8 +2,6 @@
 
 /**
  * @brief       初始化 LED 引脚（PB0 绿灯, PB1 红灯）
- *   @note      推挽输出，下拉，低速
- *               初始状态：LED_G 灭，LED_R 灭
  * @param       无
  * @retval      无
  */

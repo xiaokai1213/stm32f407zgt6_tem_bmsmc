@@ -6,15 +6,9 @@ CAN_HandleTypeDef g_can2_handle; /* CAN2句柄 */
 /**
  * @brief       CAN1初始化函数
  *   @note      波特率: 500Kbps
- *               时钟: APB1 = 42MHz (168MHz / 4)
- *               计算公式: BaudRate = APB1_Clock / Prescaler / (TimeSeg1 + TimeSeg2 + 1)
- *               42MHz / 7 / (12 + 5 + 1) = 42MHz / 7 / 18 = 333Kbps  (示例)
- *               42MHz / 7 / (11 + 4 + 1) = 42MHz / 7 / 16 = 375Kbps
- *               42MHz / 6 / (12 + 5 + 1) = 42MHz / 6 / 18 ≈ 389Kbps
- *               42MHz / 6 / (11 + 4 + 1) = 42MHz / 6 / 16 ≈ 438Kbps
- *               42MHz / 7 / (10 + 4 + 1) = 42MHz / 7 / 15 = 400Kbps
- *               42MHz / 6 / (10 + 4 + 1) = 42MHz / 6 / 15 ≈ 467Kbps
- *               42MHz / 6 / (9 + 4 + 1) = 42MHz / 6 / 14 = 500Kbps  ✓
+ *              时钟: APB1 = 42MHz (168MHz / 4)
+ *              计算公式: BaudRate = APB1_Clock / Prescaler / (TimeSeg1 + TimeSeg2 + 1)
+ *              42MHz / 6 / (9 + 4 + 1) = 42MHz / 6 / 14 = 500Kbps  ✓
  * @param       无
  * @retval      无
  */
@@ -62,9 +56,9 @@ void can1_init(void) {
 /**
  * @brief       CAN2初始化函数
  *   @note      波特率: 500Kbps
- *               时钟: APB1 = 42MHz
- *               计算公式: BaudRate = APB1_Clock / Prescaler / (TimeSeg1 + TimeSeg2 + 1)
- *               42MHz / 6 / (9 + 4 + 1) = 42MHz / 6 / 14 = 500Kbps  ✓
+ *              时钟: APB1 = 42MHz
+ *              计算公式: BaudRate = APB1_Clock / Prescaler / (TimeSeg1 + TimeSeg2 + 1)
+ *              42MHz / 6 / (9 + 4 + 1) = 42MHz / 6 / 14 = 500Kbps  ✓
  * @param       无
  * @retval      无
  */
