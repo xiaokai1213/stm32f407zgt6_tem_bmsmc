@@ -5,18 +5,12 @@
 extern "C" {
 #endif
 
-/* 包含 ------------------------------------------------------------------*/
-/* 导出的类型 ------------------------------------------------------------*/
-/* 导出的常量 --------------------------------------------------------*/
-/* 导出的宏 ------------------------------------------------------------*/
-/* 导出的函数 ------------------------------------------------------- */
-
-void NMI_Handler(void);
-void HardFault_Handler(void);
-void MemManage_Handler(void);
-void BusFault_Handler(void);
-void UsageFault_Handler(void);
-void DebugMon_Handler(void);
+void NMI_Handler(void);        /* NMI异常处理函数，空实现 */
+void HardFault_Handler(void);  /* HardFault异常处理函数，进入无限循环 */
+void MemManage_Handler(void);  /* MemManage异常处理函数，进入无限循环 */
+void BusFault_Handler(void);   /* BusFault异常处理函数，进入无限循环 */
+void UsageFault_Handler(void); /* UsageFault异常处理函数，进入无限循环 */
+void DebugMon_Handler(void);   /* DebugMon异常处理函数，空实现 */
 
 /*  外设中断处理器名称请参考启动文件(startup_stm32f4xx.s)。 */
 void USART1_IRQHandler(void); /* USART1中断处理函数 */

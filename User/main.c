@@ -1,11 +1,13 @@
 #include "main.h"
 #include "adc.h"
 #include "bms_state.h"
+#include "io_in.h"
 #include "led.h"
 #include "relay.h"
 #include "sys.h"
 #include "task.h"
 #include "task_adc1_sample.h"
+#include "task_io_read.h"
 
 /**
  * @brief  主函数
@@ -18,10 +20,12 @@ int main(void) {
     relay_init(); /* 初始化继电器 */
     led_init();   /* 初始化LED指示灯 */
     adc1_init();  /* 初始化ADC外设 */
+    io_in_init(); /* 初始化IO输入引脚 */
 
     /* FreeRTOS任务创建 */
     xTaskCreate(Task_BMS_Main, "BMS_Main", 256, NULL, 5, NULL);       /* 创建BMS主控任务 */
     xTaskCreate(Task_ADC1_Sample, "ADC1_Sample", 256, NULL, 3, NULL); /* 创建ADC采样任务 (10ms周期) */
+    xTaskCreate(Task_IO_Read, "IO_Read", 128, NULL, 4, NULL);         /* 创建IO读取任务 (50ms周期) */
 
     /* 启动任务调度器 */
     vTaskStartScheduler();
