@@ -13,6 +13,7 @@
 #include "task_can_tx.h"
 #include "task_fault_detect.h"
 #include "task_io_read.h"
+#include "usart.h"
 
 /**
  * @brief  主函数
@@ -23,12 +24,13 @@ int main(void) {
     Interrupt_Config();   /* 配置中断优先级 */
 
     /* 初始化板级外设 */
-    relay_init(); /* 初始化继电器 */
-    led_init();   /* 初始化LED指示灯 */
-    adc1_init();  /* 初始化ADC外设 */
-    io_in_init(); /* 初始化IO输入引脚 */
-    can1_init();  /* 初始化CAN1 (500Kbps, 含接收中断) */
-    can2_init();  /* 初始化CAN2 (500Kbps, 含接收中断) */
+    usart_init(115200); /* 初始化串口 (115200bps) */
+    relay_init();       /* 初始化继电器 */
+    led_init();         /* 初始化LED指示灯 */
+    adc1_init();        /* 初始化ADC外设 */
+    io_in_init();       /* 初始化IO输入引脚 */
+    can1_init();        /* 初始化CAN1 (500Kbps, 含接收中断) */
+    can2_init();        /* 初始化CAN2 (500Kbps, 含接收中断) */
 
     /* FreeRTOS任务创建 */
     xTaskCreate(Task_BMS_Main, "BMS_Main", 256, NULL, 5, NULL);         /* 创建BMS主控任务 */

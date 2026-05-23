@@ -1,8 +1,8 @@
 #ifndef _BMS_STATE_H
 #define _BMS_STATE_H
 
-#include "event_groups.h"
 #include "main.h"
+#include "event_groups.h"
 
 /*******************************************************************************************************/
 /* BMS状态管理定义 */
@@ -63,6 +63,18 @@ void Task_BMS_Main(void *parameters); /* BMS状态管理主任务函数 */
 void bms_state_init(void);            /* BMS状态管理初始化函数 */
 void bms_state_task(void);            /* BMS状态机主循环函数 */
 void bms_state_transition(void);      /* 状态切换函数，调用对应状态的entry函数 */
+
+/* 各状态的entry和run函数 */
+void bms_state_idle_entry(void);      /* 进入空闲状态 */
+void bms_state_idle_run(void);        /* 空闲状态运行逻辑 */
+void bms_state_precharge_entry(void); /* 进入预充电状态 */
+void bms_state_precharge_run(void);   /* 预充电状态运行逻辑 */
+void bms_state_run_entry(void);       /* 进入放电运行状态 */
+void bms_state_run_run(void);         /* 放电运行状态逻辑 */
+void bms_state_charge_entry(void);    /* 进入充电状态 */
+void bms_state_charge_run(void);      /* 充电状态逻辑 */
+void bms_state_fault_entry(void);     /* 进入故障状态 */
+void bms_state_fault_run(void);       /* 故障状态逻辑 */
 
 /*******************************************************************************************************/
 

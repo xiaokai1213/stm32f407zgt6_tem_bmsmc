@@ -7,6 +7,8 @@
 #include "stdlib.h"
 #include "stm32f4xx_hal.h"
 
+#pragma diag_suppress 870 /* 屏蔽对应的警告编号 */
+
 /* 函数声明 */
 void Error_Handler(void); /* 错误处理函数 */
 

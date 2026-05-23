@@ -1,4 +1,5 @@
 #include "can.h"
+#include "queue.h"
 #include "task.h"
 #include "task_can_rx.h"
 
@@ -185,7 +186,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
     }
 
     /* 唤醒CAN接收任务 */
-    xTaskNotifyGiveFromISR(g_can_rx_task_handle, NULL);
+    vTaskNotifyGiveFromISR(g_can_rx_task_handle, NULL);
 
     /* 退出中断回调时做一次上下文切换 */
     portYIELD_FROM_ISR(pdTRUE);

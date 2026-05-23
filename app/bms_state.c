@@ -1,6 +1,9 @@
 #include "bms_state.h"
-#include "ccs_detect.h"
+#include "event_groups.h"
 #include "queue.h"
+#include "ccs_detect.h"
+#include "led.h"
+#include "relay.h"
 #include "task_adc1_sample.h"
 
 EventGroupHandle_t g_bms_event_group = NULL; /* 事件组句柄定义 */
@@ -177,7 +180,7 @@ void BMS_ClearFault(void) {
  * @param       无
  * @retval      无
  */
-static void bms_state_idle_entry(void) {
+void bms_state_idle_entry(void) {
     /* 释放所有继电器 */
     RELAY_PRE_H_CON_OFF();
     RELAY_AIR_H_CON_OFF();
@@ -197,7 +200,7 @@ static void bms_state_idle_entry(void) {
  * @param       无
  * @retval      无
  */
-static void bms_state_idle_run(void) {
+void bms_state_idle_run(void) {
     EventBits_t bits;                                   /* 等待事件位 */
     const TickType_t xTicksToWait = pdMS_TO_TICKS(500); /* 等待500ms，保持空闲状态的响应性 */
 
@@ -230,7 +233,7 @@ static void bms_state_idle_run(void) {
  * @param       无
  * @retval      无
  */
-static void bms_state_precharge_entry(void) {
+void bms_state_precharge_entry(void) {
     /* 记录预充电起始时间，用于超时判断 */
     precharge_start_tick = xTaskGetTickCount();
 
@@ -249,7 +252,7 @@ static void bms_state_precharge_entry(void) {
  * @param       无
  * @retval      无
  */
-static void bms_state_precharge_run(void) {
+void bms_state_precharge_run(void) {
     TickType_t elapsed;             /* 预充电已运行时间 */
     ADC_SampleData_t latest_sample; /* 最新ADC采样数据 */
 
@@ -292,7 +295,7 @@ static void bms_state_precharge_run(void) {
         RELAY_PRE_H_CON_OFF();
         RELAY_AIR_L_CON_OFF();
         current_bms_state = BMS_STATE_FAULT;
-        printf("[BMS] 预充电超时 (%lu ms)\n", (unsigned long)elapsed);
+        printf("[BMS]预充超时(%lu ms)\n", (unsigned long)elapsed);
     }
 
     /* 延时10ms后继续检查，保持预充状态的响应性 */
@@ -306,7 +309,7 @@ static void bms_state_precharge_run(void) {
  * @param       无
  * @retval      无
  */
-static void bms_state_run_entry(void) {
+void bms_state_run_entry(void) {
     LED_R_OFF(); /* 无故障 */
     LED_G_OFF(); /* 有高压输出，非安全状态 */
     printf("[BMS] 进入放电运行状态\n");
@@ -318,7 +321,7 @@ static void bms_state_run_entry(void) {
  * @param       无
  * @retval      无
  */
-static void bms_state_run_run(void) {
+void bms_state_run_run(void) {
     EventBits_t bits;
     const TickType_t xTicksToWait = pdMS_TO_TICKS(500);
 
@@ -355,14 +358,13 @@ static void bms_state_run_run(void) {
  * @param       无
  * @retval      无
  */
-static void bms_state_charge_entry(void) {
+void bms_state_charge_entry(void) {
     LED_R_OFF(); /* 无故障 */
     LED_G_OFF(); /* 有高压输出，非安全状态 */
 
     /* 发送充电控制报文，开启充电机 (control=0: 开启充电) */
     CCS_SendControlMsg(BMS_CHARGE_MAX_V, BMS_CHARGE_MAX_C, 0);
-    printf("[BMS] 进入充电状态，发送开启充电控制报文 (V=%u.%uV, C=%u.%uA)\n", BMS_CHARGE_MAX_V / 10, BMS_CHARGE_MAX_V % 10, BMS_CHARGE_MAX_C / 10,
-           BMS_CHARGE_MAX_C % 10);
+    printf("[BMS] 进入充电状态\n");
 }
 
 /**
@@ -371,7 +373,7 @@ static void bms_state_charge_entry(void) {
  * @param       无
  * @retval      无
  */
-static void bms_state_charge_run(void) {
+void bms_state_charge_run(void) {
     EventBits_t bits;
     static TickType_t last_ctrl_tick = 0; /* 上次发送控制报文的时间戳 */
     const TickType_t xTicksToWait = pdMS_TO_TICKS(500);
@@ -417,7 +419,7 @@ static void bms_state_charge_run(void) {
  * @param       无
  * @retval      无
  */
-static void bms_state_fault_entry(void) {
+void bms_state_fault_entry(void) {
     /* 断开所有继电器 */
     RELAY_PRE_H_CON_OFF();
     RELAY_AIR_H_CON_OFF();
@@ -436,7 +438,7 @@ static void bms_state_fault_entry(void) {
  * @param       无
  * @retval      无
  */
-static void bms_state_fault_run(void) {
+void bms_state_fault_run(void) {
     EventBits_t bits;
     const TickType_t xTicksToWait = pdMS_TO_TICKS(100);
 

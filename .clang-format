@@ -66,8 +66,12 @@ IncludeCategories: # include 排序规则。
     Priority: 1
   - Regex: '^<.*' # 第二类：其他系统头文件。
     Priority: 2
-  - Regex: '.*' # 第三类：项目头文件。
+  - Regex: '^"main\.h"' # 第三类：main.h（包含FreeRTOS.h，必须排在FreeRTOS各头文件之前）。
     Priority: 3
+  - Regex: '^"FreeRTOS\.h"|^"task\.h"|^"queue\.h"|^"event_groups\.h"|^"timers\.h"|^"semphr\.h"' # 第四类：FreeRTOS内核头文件（需在main.h之后）。
+    Priority: 4
+  - Regex: '.*' # 第五类：其他项目头文件。
+    Priority: 5
 IncludeIsMainRegex: '([-_](test|unittest))?$' # 判断是否为主头文件。
 IndentWrappedFunctionNames: false # 换行的函数名不缩进。
 JavaScriptQuotes: Leave # JavaScript 保留原始引号风格。

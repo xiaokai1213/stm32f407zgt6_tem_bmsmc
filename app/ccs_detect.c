@@ -1,6 +1,6 @@
 #include "ccs_detect.h"
-#include "bms_state.h"
 #include "task.h"
+#include "bms_state.h"
 #include "task_can_tx.h"
 
 /**
@@ -32,16 +32,16 @@ void CCS_ProcessEvent(uint8_t *data) {
     if (!is_fault && !is_temp_prot && !is_in_v_err && !is_timeout) {
         /* 所有状态位正常 → 发送充电请求 */
         BMS_SetChargeReq();
-        printf("[CCS] 充电机状态正常，发送充电请求 (V=%u.%uV, C=%u.%uA)\n", out_v / 10, out_v % 10, out_c / 10, out_c % 10);
+        printf("[CCS]充电机状态正常,发送充电请求(V=%u.%uV, C=%u.%uA)\n", out_v / 10, out_v % 10, out_c / 10, out_c % 10);
     } else {
         /* 存在异常 → 清除充电请求 */
         BMS_ClearChargeReq();
-        printf("[CCS] 充电机状态异常: ");
+        printf("[CCS] 充电机状态异常:");
 
         if (is_fault) { printf("硬件故障 "); }
         if (is_temp_prot) { printf("温度过高 "); }
         if (is_in_v_err) { printf("输入电压错误 "); }
-        if (is_shutdown) { printf("充电机关闭/电池反接 "); }
+        if (is_shutdown) { printf("充电机关闭或电池反接 "); }
         if (is_timeout) { printf("通信超时 "); }
         printf("\n");
     }
