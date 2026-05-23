@@ -1,4 +1,5 @@
 #include "stm32f4xx_it.h"
+#include "can.h"
 #include "main.h"
 #include "task.h"
 #include "usart.h"
@@ -72,9 +73,7 @@ void DebugMon_Handler(void) {}
 void SysTick_Handler(void) {
     HAL_IncTick();
     /* OS开始跑了,才执行正常的调度处理 */
-    if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED) {
-        xPortSysTickHandler(); /* 调用FreeRTOS的SysTick处理函数，进行任务调度 */
-    }
+    if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED) { xPortSysTickHandler(); /* 调用FreeRTOS的SysTick处理函数，进行任务调度 */ }
 }
 
 /******************************************************************************/
@@ -91,4 +90,24 @@ void SysTick_Handler(void) {
 void USART1_IRQHandler(void) {
     /* 调用HAL库中断处理公用函数 */
     HAL_UART_IRQHandler(&g_uart1_handle);
+}
+
+/**
+ * @brief  此函数处理CAN1 RX0中断（FIFO0消息挂起）。
+ * @param  无
+ * @retval 无
+ */
+void CAN1_RX0_IRQHandler(void) {
+    /* 调用HAL库中断处理公用函数 */
+    HAL_CAN_IRQHandler(&g_can1_handle);
+}
+
+/**
+ * @brief  此函数处理CAN2 RX0中断（FIFO0消息挂起）。
+ * @param  无
+ * @retval 无
+ */
+void CAN2_RX0_IRQHandler(void) {
+    /* 调用HAL库中断处理公用函数 */
+    HAL_CAN_IRQHandler(&g_can2_handle);
 }

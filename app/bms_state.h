@@ -18,17 +18,28 @@ typedef enum {
 /*******************************************************************************************************/
 /* 事件组位定义 - 用于任务间通信 */
 
-#define BMS_EVENT_CHARGE_REQ     (1 << 0) /* 充电请求信号 (bit0) */
-#define BMS_EVENT_DISCHARGE_REQ  (1 << 1) /* 放电请求信号 (bit1) */
-#define BMS_EVENT_FAULT          (1 << 2) /* 故障信号 (bit2) */
-#define BMS_EVENT_CLEAR_FAULT    (1 << 3) /* 故障清除信号 (bit3) */
-#define BMS_EVENT_PRECHARGE_DONE (1 << 4) /* 预充完成信号 (bit4) */
+#define BMS_EVENT_CHARGE_REQ    (1 << 0) /* 充电请求信号 (bit0) */
+#define BMS_EVENT_DISCHARGE_REQ (1 << 1) /* 放电请求信号 (bit1) */
+#define BMS_EVENT_FAULT         (1 << 2) /* 故障信号 (bit2) */
+#define BMS_EVENT_CLEAR_FAULT   (1 << 3) /* 故障清除信号 (bit3) */
+/* bit4 预留 */
 
 /*******************************************************************************************************/
 /* 预充电超时时间定义 */
 
 #define BMS_PRECHARGE_TIMEOUT_MS 3000 /* 预充电超时时间 3s */
 #define BMS_PRECHARGE_HOLD_MS    500  /* 预充继电器保持时间 500ms */
+
+/* 预充完成阈值：预充电压 ≥ 90% × 电池总电压 即认为预充完成 */
+#define BMS_PRECHARGE_THRESHOLD_NUM 9  /* 分子：90% = 9/10 */
+#define BMS_PRECHARGE_THRESHOLD_DEN 10 /* 分母 */
+
+/*******************************************************************************************************/
+/* CCS充电控制参数定义 */
+
+#define BMS_CHARGE_MAX_V          3201 /* 最高充电端电压 320.1V (0.1V/bit) */
+#define BMS_CHARGE_MAX_C          582  /* 最高充电端电流 58.2A (0.1A/bit)  */
+#define BMS_CHARGE_CTRL_PERIOD_MS 1000 /* CCS控制报文发送周期 1000ms (1s) */
 
 /*******************************************************************************************************/
 /* 外部变量声明 */

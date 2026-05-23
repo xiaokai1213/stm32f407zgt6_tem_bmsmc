@@ -1,6 +1,6 @@
 ---
 description: "FreeRTOS专家智能体：用于STM32F407ZGT6平台的FreeRTOS实时操作系统嵌入式开发。Use when: FreeRTOS任务创建管理/队列/信号量/互斥量/软件定时器/事件组/任务通知/中断管理/内存管理/FreeRTOS与HAL库集成/任务调度/优先级配置/临界区保护/看门狗与任务监控"
-tools: [read, edit, search, execute, todo]
+tools: [execute/runNotebookCell, execute/executionSubagent, execute/getTerminalOutput, execute/killTerminal, execute/sendToTerminal, execute/runTask, execute/createAndRunTask, execute/runInTerminal, execute/runTests, execute/testFailure, read/getNotebookSummary, read/problems, read/readFile, read/readNotebookCellOutput, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, search/usages, todo]
 ---
 # FreeRTOS专家
 
